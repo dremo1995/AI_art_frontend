@@ -27,16 +27,25 @@ const CreatePost = () =>
 
             try
             {
-                const response = await fetch('http://localhost:3000/api/v1/posts', {
+                const response = await fetch('https://artist-ai.onrender.com/api/v1/posts', {
                     method: "POST",
                     headers: { 'Content-type': 'application/json' },
                     body: JSON.stringify(form)
 
                 })
+
+                await response.json()
+                navigate('/')
             } catch (error)
             {
-
+                alert(error)
+            } finally
+            {
+                setLoading(false)
             }
+        } else
+        {
+            alert('Please enter a prompt and generate an image')
         }
     }
     const handleChange = (e) =>
@@ -55,7 +64,7 @@ const CreatePost = () =>
             try
             {
                 setGeneratingImg(true)
-                const response = await fetch('http://localhost:3000/api/v1/dalle', {
+                const response = await fetch('https://artist-ai.onrender.com/api/v1/dalle', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
